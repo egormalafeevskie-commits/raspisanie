@@ -1,0 +1,1059 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --bg: #0e1420;
+
+    --bg2: #16203040;
+
+    --card: #182234;
+
+    --card-hover: #1f2c42;
+
+    --border: #253449;
+
+    --accent: #4fc3ff;
+
+    --accent2: #7ee787;
+
+    --text: #d9e6f5;
+
+    --muted: #7b91ab;
+
+    --danger: #ff7b72;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 30% 10%,
+            #1a2942,
+            #0a0f18 70%
+        );
+
+    color: var(--text);
+
+    font-family:
+        'Segoe UI',
+        system-ui,
+        sans-serif;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    padding: 40px 16px;
+
+    overflow-x: hidden;
+
+}
+
+
+button,
+input {
+
+    font: inherit;
+
+}
+
+
+button {
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+}
+
+
+/* =========================================================
+   ЭКРАНЫ
+========================================================= */
+
+.screen {
+
+    display: none;
+
+    width: 100%;
+
+    max-width: 560px;
+
+}
+
+
+.screen.active {
+
+    display: block;
+
+    animation:
+        fade .3s ease;
+
+}
+
+
+.screen#screen-groups.active,
+.screen#screen-schedule.active {
+
+    max-width: 1100px;
+
+}
+
+
+/* =========================================================
+   АНИМАЦИЯ
+========================================================= */
+
+@keyframes fade {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   КАРТОЧКА
+========================================================= */
+
+.card {
+
+    background:
+        linear-gradient(
+            180deg,
+            #1a2436,
+            #141c2b
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 32px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.5);
+
+}
+
+
+/* =========================================================
+   ЗАГОЛОВКИ
+========================================================= */
+
+h1 {
+
+    font-size: 30px;
+
+    font-weight: 600;
+
+    margin-bottom: 6px;
+
+}
+
+
+h2 {
+
+    font-size: 20px;
+
+    font-weight: 500;
+
+}
+
+
+.subtitle {
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    margin-bottom: 28px;
+
+}
+
+
+/* =========================================================
+   ЗАГРУЗКА ФАЙЛА
+========================================================= */
+
+.drop-zone {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 40px 20px;
+
+    border:
+        2px dashed var(--border);
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    transition: all .2s;
+
+    text-align: center;
+
+}
+
+
+.drop-zone:hover,
+.drop-zone.dragover {
+
+    border-color:
+        var(--accent);
+
+    background:
+        var(--bg2);
+
+}
+
+
+.drop-icon {
+
+    font-size: 38px;
+
+}
+
+
+.drop-text {
+
+    font-size: 14px;
+
+    color: var(--muted);
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   ФАЙЛ
+========================================================= */
+
+.file-info {
+
+    margin-top: 16px;
+
+    padding: 12px 16px;
+
+    background:
+        var(--bg2);
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    color:
+        var(--accent2);
+
+}
+
+
+.file-info.hidden {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   ОСНОВНАЯ КНОПКА
+========================================================= */
+
+.btn-primary {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 14px;
+
+    font-size: 15px;
+
+    letter-spacing: 1px;
+
+    text-transform:
+        uppercase;
+
+    border:
+        1px solid var(--accent);
+
+    background:
+        linear-gradient(
+            90deg,
+            #2a7fbf,
+            #4fc3ff
+        );
+
+    color: #fff;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: all .2s;
+
+    font-weight: 600;
+
+}
+
+
+.btn-primary:hover:not(:disabled) {
+
+    box-shadow:
+        0 0 30px
+        rgba(79,195,255,.5);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.btn-primary:disabled {
+
+    opacity: .35;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================================
+   КНОПКА НАЗАД
+========================================================= */
+
+.btn-back {
+
+    padding: 8px 18px;
+
+    background: transparent;
+
+    border:
+        1px solid var(--border);
+
+    color:
+        var(--muted);
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    transition: all .2s;
+
+}
+
+
+.btn-back:hover {
+
+    border-color:
+        var(--accent);
+
+    color:
+        var(--accent);
+
+}
+
+
+/* =========================================================
+   ОБНОВИТЬ РАСПИСАНИЕ
+========================================================= */
+
+.btn-update {
+
+    margin-left: auto;
+
+    padding: 8px 14px;
+
+    background:
+        rgba(79,195,255,.08);
+
+    border:
+        1px solid var(--accent);
+
+    color:
+        var(--accent);
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: all .2s;
+
+}
+
+
+.btn-update:hover {
+
+    background:
+        var(--accent);
+
+    color:
+        #08101c;
+
+    box-shadow:
+        0 0 20px
+        rgba(79,195,255,.25);
+
+}
+
+
+/* =========================================================
+   ОШИБКА
+========================================================= */
+
+.error {
+
+    margin-top: 14px;
+
+    padding: 12px 16px;
+
+    background:
+        rgba(255,123,114,.1);
+
+    border:
+        1px solid var(--danger);
+
+    color:
+        var(--danger);
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    white-space:
+        pre-wrap;
+
+}
+
+
+.hidden {
+
+    display:
+        none !important;
+
+}
+
+
+/* =========================================================
+   ВЕРХНЯЯ ПАНЕЛЬ
+========================================================= */
+
+.topbar {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-bottom: 24px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.topbar h2 {
+
+    color:
+        var(--accent);
+
+}
+
+
+/* =========================================================
+   КУРСЫ
+========================================================= */
+
+.course-tabs {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.course-btn {
+
+    padding: 10px 20px;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    color:
+        var(--muted);
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: all .2s;
+
+}
+
+
+.course-btn:hover {
+
+    border-color:
+        var(--accent);
+
+    color:
+        var(--accent);
+
+}
+
+
+.course-btn.active {
+
+    background:
+        var(--accent);
+
+    color:
+        #08101c;
+
+    border-color:
+        var(--accent);
+
+}
+
+
+/* =========================================================
+   ГРУППЫ
+========================================================= */
+
+.groups-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(150px, 1fr)
+        );
+
+    gap: 12px;
+
+}
+
+
+.group-btn {
+
+    padding: 18px 12px;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+    color:
+        var(--text);
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all .2s;
+
+    text-align: center;
+
+}
+
+
+.group-btn:hover {
+
+    background:
+        var(--card-hover);
+
+    border-color:
+        var(--accent);
+
+    color:
+        var(--accent);
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(79,195,255,.2);
+
+}
+
+
+.empty-state {
+
+    grid-column:
+        1 / -1;
+
+    padding: 30px;
+
+    text-align: center;
+
+    color:
+        var(--muted);
+
+}
+
+
+/* =========================================================
+   ПЕРЕКЛЮЧАТЕЛЬ
+========================================================= */
+
+.view-switch {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 16px;
+
+}
+
+
+.view-btn {
+
+    padding: 10px 18px;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    color:
+        var(--muted);
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: all .2s;
+
+    font-size: 14px;
+
+}
+
+
+.view-btn.active {
+
+    background:
+        var(--accent);
+
+    color:
+        #08101c;
+
+    border-color:
+        var(--accent);
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================================
+   ВЫБОР ДНЯ
+========================================================= */
+
+.day-picker {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.day-picker button {
+
+    padding: 10px 20px;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    color:
+        var(--text);
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: all .2s;
+
+}
+
+
+.day-picker button:hover,
+.day-picker button.active {
+
+    border-color:
+        var(--accent);
+
+    color:
+        var(--accent);
+
+}
+
+
+.day-picker button.active {
+
+    background:
+        rgba(79,195,255,.1);
+
+}
+
+
+/* =========================================================
+   РАСПИСАНИЕ
+========================================================= */
+
+.schedule-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+}
+
+
+.day-block {
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+}
+
+
+.day-title {
+
+    padding: 14px 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #1f2c42,
+            #182234
+        );
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color:
+        var(--accent);
+
+    border-bottom:
+        1px solid var(--border);
+
+}
+
+
+/* =========================================================
+   ПАРА
+========================================================= */
+
+.lesson {
+
+    padding: 14px 20px;
+
+    border-bottom:
+        1px solid #1e2a3c;
+
+    display: flex;
+
+    gap: 18px;
+
+    align-items:
+        flex-start;
+
+}
+
+
+.lesson:last-child {
+
+    border-bottom:
+        none;
+
+}
+
+
+.lesson-num {
+
+    min-width: 42px;
+
+    height: 42px;
+
+    background:
+        var(--bg2);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+
+    color:
+        var(--accent);
+
+    flex-shrink: 0;
+
+}
+
+
+.lesson-body {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.lesson-subject {
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    margin-bottom: 4px;
+
+    color:
+        #eaf3ff;
+
+}
+
+
+.lesson-teacher {
+
+    font-size: 13px;
+
+    color:
+        var(--muted);
+
+    margin-bottom: 2px;
+
+}
+
+
+.lesson-room {
+
+    display: inline-block;
+
+    margin-top: 6px;
+
+    padding: 3px 10px;
+
+    background:
+        rgba(79,195,255,.1);
+
+    border:
+        1px solid
+        rgba(79,195,255,.3);
+
+    color:
+        var(--accent);
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+}
+
+
+.lesson-note {
+
+    display: inline-block;
+
+    margin-top: 6px;
+
+    margin-left: 6px;
+
+    padding: 3px 10px;
+
+    background:
+        rgba(255,180,80,.12);
+
+    border:
+        1px solid
+        rgba(255,180,80,.3);
+
+    color:
+        #ffb450;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+}
+
+
+.empty-day {
+
+    padding: 24px 20px;
+
+    text-align: center;
+
+    color:
+        var(--muted);
+
+    font-style:
+        italic;
+
+}
+
+
+/* =========================================================
+   ТЕЛЕФОН
+========================================================= */
+
+@media (max-width: 640px) {
+
+    body {
+
+        padding:
+            16px 8px;
+
+    }
+
+
+    .card {
+
+        padding:
+            20px;
+
+        border-radius:
+            14px;
+
+    }
+
+
+    h1 {
+
+        font-size:
+            24px;
+
+    }
+
+
+    .topbar {
+
+        gap:
+            10px;
+
+    }
+
+
+    .topbar h2 {
+
+        flex:
+            1;
+
+        min-width:
+            120px;
+
+    }
+
+
+    .btn-update {
+
+        margin-left:
+            0;
+
+        width:
+            100%;
+
+    }
+
+
+    .lesson {
+
+        padding:
+            12px 14px;
+
+        gap:
+            12px;
+
+    }
+
+}

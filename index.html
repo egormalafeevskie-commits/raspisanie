@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Расписание ВКК</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="theme-color" content="#16243a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Расписание ВКК">
+</head>
+
+<body>
+
+<!-- ==================================================
+     ЭКРАН 1 — ГЛАВНОЕ МЕНЮ
+================================================== -->
+
+<section id="screen-menu" class="screen active">
+
+    <div class="card">
+
+        <h1>📅 Расписание</h1>
+
+        <p class="subtitle">
+            Вологодский кооперативный колледж
+        </p>
+
+        <label
+            for="fileInput"
+            class="drop-zone"
+            id="dropZone"
+        >
+            <span class="drop-icon">
+                📂
+            </span>
+
+            <span class="drop-text">
+                Перетащите файл сюда<br>
+                или нажмите, чтобы выбрать
+            </span>
+
+            <input
+                type="file"
+                id="fileInput"
+                accept=".xls,.xlsx,.csv"
+                hidden
+            >
+        </label>
+
+        <div
+            id="fileInfo"
+            class="file-info hidden"
+        ></div>
+
+        <button
+            id="parseBtn"
+            class="btn-primary"
+            type="button"
+            disabled
+        >
+            Разобрать
+        </button>
+
+        <div
+            id="parseError"
+            class="error hidden"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     ЭКРАН 2 — ВЫБОР ГРУППЫ
+================================================== -->
+
+<section
+    id="screen-groups"
+    class="screen"
+>
+
+    <div class="card wide">
+
+        <div class="topbar">
+
+            <button
+                class="btn-back"
+                data-back="menu"
+                type="button"
+            >
+                ← Назад
+            </button>
+
+            <h2>
+                Выберите группу
+            </h2>
+
+            <button
+                id="updateScheduleBtn"
+                class="btn-update"
+                type="button"
+            >
+                🔄 Обновить расписание
+            </button>
+
+        </div>
+
+
+        <!-- КУРСЫ -->
+
+        <div class="course-tabs">
+
+            <button
+                class="course-btn active"
+                data-course="1"
+                type="button"
+            >
+                1 курс
+            </button>
+
+            <button
+                class="course-btn"
+                data-course="2"
+                type="button"
+            >
+                2 курс
+            </button>
+
+            <button
+                class="course-btn"
+                data-course="3"
+                type="button"
+            >
+                3 курс
+            </button>
+
+            <button
+                class="course-btn"
+                data-course="4"
+                type="button"
+            >
+                4 курс
+            </button>
+
+        </div>
+
+
+        <div
+            id="groupsList"
+            class="groups-grid"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     ЭКРАН 3 — РАСПИСАНИЕ
+================================================== -->
+
+<section
+    id="screen-schedule"
+    class="screen"
+>
+
+    <div class="card wide">
+
+        <div class="topbar">
+
+            <button
+                class="btn-back"
+                data-back="groups"
+                type="button"
+            >
+                ← Группы
+            </button>
+
+            <h2 id="scheduleGroupName">
+                Группа
+            </h2>
+
+            <button
+                id="updateScheduleBtnSchedule"
+                class="btn-update"
+                type="button"
+            >
+                🔄 Обновить
+            </button>
+
+        </div>
+
+
+        <!-- ПЕРЕКЛЮЧАТЕЛЬ -->
+
+        <div class="view-switch">
+
+            <button
+                class="view-btn active"
+                data-view="week"
+                type="button"
+            >
+                Вся неделя
+            </button>
+
+            <button
+                class="view-btn"
+                data-view="day"
+                type="button"
+            >
+                Конкретный день
+            </button>
+
+        </div>
+
+
+        <!-- ДНИ -->
+
+        <div
+            id="dayPicker"
+            class="day-picker hidden"
+        >
+
+            <button
+                data-day="0"
+                type="button"
+            >
+                ПН
+            </button>
+
+            <button
+                data-day="1"
+                type="button"
+            >
+                ВТ
+            </button>
+
+            <button
+                data-day="2"
+                type="button"
+            >
+                СР
+            </button>
+
+            <button
+                data-day="3"
+                type="button"
+            >
+                ЧТ
+            </button>
+
+            <button
+                data-day="4"
+                type="button"
+            >
+                ПТ
+            </button>
+
+            <button
+                data-day="5"
+                type="button"
+            >
+                СБ
+            </button>
+
+        </div>
+
+
+        <!-- РАСПИСАНИЕ -->
+
+        <div
+            id="scheduleContent"
+            class="schedule-content"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script src="xlsx.full.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
